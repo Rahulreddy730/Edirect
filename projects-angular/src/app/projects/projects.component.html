@@ -1,0 +1,54 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="cards">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="50%" fxFlex.md="66.6667%" fxFlex.gt-md="50%">
+      <mat-card class="project-card">
+        <mat-card-header class="project-header-card">
+          <mat-card-title>{{project?.name}}</mat-card-title>
+          <mat-card-subtitle>{{project?.title}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <mat-card-content>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>To Do List</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <ng-container >
+              <ng-container *ngIf="toDos?.length > 0; else allDone">
+                <app-todo-list [toDos]="toDos" (toDoChange)="onCompleteToDo($event)"></app-todo-list>
+              </ng-container>
+              <ng-template #allDone>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <h4>All Done!</h4>
+                </div>
+              </ng-template>
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Done</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-todo-list [toDos]="completeToDos | async" (toDoChange)="onIncompleteToDo($event)"></app-todo-list>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Add To Do</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-todo-form (toDoChange)="onAddToDoChange($event)"></app-todo-form>
+            <div fxLayout="row" fxLayoutAlign="start">
+              <button mat-button color="primary" (click)="addToDo($event)">Add To Do</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+              <button mat-icon-button color="primary" routerLink="/projectslist">Projects</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+    </div>
+  </div>
+</div>
