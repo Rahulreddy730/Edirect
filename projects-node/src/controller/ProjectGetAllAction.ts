@@ -13,6 +13,6 @@ export async function projectGetAllAction(request: Request, response: Response) 
     // load a post by a given post id
     const posts = await postRepository.find();
 
-    // return loaded posts
+    // return loaded posts 
     response.send(posts);
 }
